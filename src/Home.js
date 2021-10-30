@@ -41,14 +41,14 @@ const Home = () => {
             setGames(finalData)
         }
         const news = async () => {
-            let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
-            let json = await r.json()
-            setNews(json.articles)
+            fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
+                .then((response) => response.json())
+                .then((data) => setNews(data.articles))
         }
         const table = async () => {
-            let r = await fetch('http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
-            let json = await r.json()
-            setStandings(json.children[0].standings.entries)
+            fetch('http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
+                .then((response) => response.json())
+                .then((data) => setStandings(data.children[0].standings.entries))
         }
         func()
         news()
