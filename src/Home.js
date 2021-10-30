@@ -1,6 +1,5 @@
 import React from 'react'
 import {useEffect, useState} from 'react';
-import axios from 'axios';
 
 const Home = () => {
     const [games, setGames] = useState([])
@@ -8,9 +7,10 @@ const Home = () => {
     const [standings, setStandings] = useState([])
     useEffect(() => {
         const func = async () => {
-            let r = await axios.get('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
-            let today = r.data.day.date
-            let allDays = r.data.leagues[0].calendar;
+            let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+            let json = await r.json()
+            let today = json.day.date
+            let allDays = json.leagues[0].calendar;
             let todayIndex = 0;
             let gameDays = []
             for (let i = 0; i< allDays.length; i++) {
@@ -23,7 +23,7 @@ const Home = () => {
             }
             let matchDays = []
             for (let i = 0; i < gameDays.length; i++){
-                matchDays.push(r.data.leagues[0].calendar[gameDays[i]])
+                matchDays.push(json.leagues[0].calendar[gameDays[i]])
             }
             for (let i = 0; i < matchDays.length; i++){
                 matchDays[i] = matchDays[i].slice(0, 10).replace('-', '').replace('-', '')
@@ -31,21 +31,24 @@ const Home = () => {
             }
             let finalData = []
             for (let i = 0; i<matchDays.length;i++){
-                let r = await axios.get(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
-                finalData.push(r.data.events[0].status.type.detail)
-                for (let j = 0; j < r.data.events.length; j++){
-                    finalData.push(r.data.events[j]);
+                let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
+                let json = await r.json()
+                finalData.push(json.events[0].status.type.detail)
+                for (let j = 0; j < json.events.length; j++){
+                    finalData.push(json.events[j]);
                 }
             }
             setGames(finalData)
         }
         const news = async () => {
-            let r = await axios.get('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
-            setNews(r.data.articles)
+            let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
+            let json = await r.json()
+            setNews(json.articles)
         }
         const table = async () => {
-            let r = await axios.get('http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
-            setStandings(r.data.children[0].standings.entries)
+            let r = await fetch('http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
+            let json = await r.json()
+            setStandings(json.children[0].standings.entries)
         }
         func()
         news()
@@ -140,4 +143,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;
