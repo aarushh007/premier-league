@@ -1,38 +1,197 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar {
+  width: 100%;
+  background-color: #160021;
+  overflow: auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-width: 100%;
+}
+
+/* Navbar links */
+.navbar a {
+  float: left;
+  text-align: center;
+  padding: 12px;
+  height: 100%;
+  color: #00FF85;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a :not(img):hover{
+  border-bottom: 2px solid white;
+}
+
+.pl_logo {
+  max-width: 100px;
+}
+
+/* Navbar links on mouse-over */
+.navbar a:hover {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+  background-color: #38003C;
+}
+.game img {
+  max-width: 35px;
+  max-height: 35px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.game {
+  display: flex;
+  width: fit-content;
+  background-color: #160021;
+  padding: 5px 15px;
+  align-items: center;
+  color: white;
+  width: 220px;
+  justify-content: center;
+  gap: 5px;
+  border-bottom: solid 1px #00FF85;
+  flex-wrap: wrap;
+  max-height: 80px;
+  text-decoration: none;
+}
+.game:hover {
+  background: linear-gradient(to right, #04F5FF, #E90052)
+}
+
+.game span {
+  position: relative;
+  bottom: 10px;
+  text-decoration: none;
+}
+.game p {
+  background-color: #38003C;
+  padding: 5px;
+  text-decoration: none;
+}
+.matchday {
+  color: white;
+  font-size: 17px;
+}
+
+.game :hover {
+  background-color: linear-gradient(to right,#04F5FF, #E90052);
+}
+.games {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+  grid-area: games;
+  margin-right: 15px;
+  overflow: auto;
+  min-width: 230px;
+}
+
+.news_img {
+  width: 100%;
+}
+
+.home {
+  display: grid;
+  grid-template-areas: 'games news news table';
+  gap: 10px;
+  padding: 30px;
+}
+
+.news {
+  grid-area: news;
+  padding: none;
+  min-width: 300px;
+}
+
+.article {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.article a {
+  color: #00FF85;
+  text-decoration: none;
+  font-size: 21px;
+}
+
+.article a:hover {
+  color: white;
+}
+
+.simple_table {
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  grid-area: table;
+  margin-left: 15px;
+  float: left;
+}
+
+.simple_table table, th, td {
+  border: solid 1px black;
+}
+
+.simple_table tbody {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.simple_table thead {
+  background-color: lime;
+  color: black;
+}
+
+.simple_table th, td {
+  padding: 10px;
+}
+
+.simple_table table {
+  width: 100%;
+  border: none;
+  margin: none;
+}
+
+.simple_table table tr {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+}
+.simple_table table thead {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+}
+
+.club_simple {
+  text-align: left;
+}
+
+@media (max-width: 920px){
+  .simple_table {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+  .home {
+    grid-template-areas: 'games news news';
   }
+}
+
+@media (max-width: 585px){
+  .home {
+    grid-template-areas: 'games'
+                          'news'
+  }
+  .games {
+    min-width: 100%;
+    align-items:center;
+  }
+}
+
+@media (max-width: 398px){
 }
