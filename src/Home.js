@@ -46,7 +46,7 @@ const Home = () => {
                 .then((data) => setNews(data.articles))
         }
         const table = async () => {
-            fetch('http://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
+            fetch('https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
                 .then((response) => response.json())
                 .then((data) => setStandings(data.children[0].standings.entries))
         }
