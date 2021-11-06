@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Nav from './Nav';
 import Home from './Home';
+import Table from './Table';
 
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route path='/' exact>
             <Home />
+          </Route>
+          <Route path='/table' exact>
+            <Table />
           </Route>
         </Switch>
       </Router>

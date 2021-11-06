@@ -41,18 +41,24 @@ body {
 
 .game {
   display: flex;
+  flex-direction: column;
   width: fit-content;
   background-color: #160021;
   padding: 5px 15px;
-  align-items: center;
   color: white;
   width: 220px;
-  justify-content: center;
-  gap: 5px;
   border-bottom: solid 1px #00FF85;
-  flex-wrap: wrap;
   max-height: 80px;
   text-decoration: none;
+}
+.game span {
+  margin: auto;
+}
+.game_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 .game:hover {
   background: linear-gradient(to right, #04F5FF, #E90052)
@@ -83,13 +89,8 @@ body {
   margin-bottom: 10px;
   width: 100%;
   grid-area: games;
-  margin-right: 15px;
   overflow: auto;
   min-width: 230px;
-}
-
-.news_img {
-  width: 100%;
 }
 
 .home {
@@ -103,6 +104,13 @@ body {
   grid-area: news;
   padding: none;
   min-width: 300px;
+  margin-right: 15px;
+  margin-left: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  column-gap: 20px;
+  row-gap: 10px;
 }
 
 .article {
@@ -111,14 +119,26 @@ body {
   flex-direction: column;
   max-width: 100%;
   width: 100%;
-  position: relative;
-  margin-bottom: 20px;
+}
+
+.news_img {
+  width: 100%;
+}
+
+@media (max-width: 855px){
+  .news {
+    grid-template-columns: 1fr;
+    grid-template-rows:auto;
+  }
+  .article a {
+    font-size: 3vw;
+  }
 }
 
 .article a {
   color: #00FF85;
   text-decoration: none;
-  font-size: 21px;
+  font-size: 2vw;
 }
 
 .article a:hover {
@@ -132,7 +152,6 @@ body {
   justify-content: center;
   align-items: flex-start;
   grid-area: table;
-  margin-left: 15px;
   float: left;
 }
 
@@ -182,7 +201,7 @@ body {
   }
 }
 
-@media (max-width: 585px){
+@media (max-width: 610px){
   .home {
     grid-template-areas: 'games'
                           'news'
@@ -193,5 +212,92 @@ body {
   }
 }
 
-@media (max-width: 398px){
+.mobile {
+  display: none;
+  color: white;
+  font-size: 35px;
+  margin-left: auto;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 500px){
+  .wide {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .home {
+    padding: 10px 0;
+  }
+  .game_container {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  .game {
+    width: 100%;
+    margin: none;
+    padding: none;
+    max-width: 320px;
+  }
+  .game_info {
+    width: fit-content;
+    margin: auto;
+    padding: none;
+  }
+  .news {
+    margin: 0px;
+  }
+}
+
+.dropdown {
+  background-color: lime;
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  top: 70px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1;
+}
+
+.dropdown a {
+  color: purple;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.3em;
+}
+
+.main_table {
+  color: white;
+  width: 95%;
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.main_table th {
+  padding: 5px 10px;
+  background-color: rgb(29, 29, 29);
+}
+.main_table thead th{
+  background-color: rgb(49, 49, 49);
+  color: lime;
+}
+.club {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+h1 {
+  margin-left: 2.5%;
+  color: white;
 }

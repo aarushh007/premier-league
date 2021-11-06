@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react';
 const Home = () => {
     const [games, setGames] = useState([])
     const [news, setNews] = useState([])
-    const [standings, setStandings] = useState([])
     useEffect(() => {
         const func = async () => {
             let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
@@ -45,14 +44,8 @@ const Home = () => {
                 .then((response) => response.json())
                 .then((data) => setNews(data.articles))
         }
-        const table = async () => {
-            fetch('https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
-                .then((response) => response.json())
-                .then((data) => setStandings(data.children[0].standings.entries))
-        }
         func()
         news()
-        table()
     }, [])
     return (
         <div className='home'>
@@ -61,38 +54,44 @@ const Home = () => {
                 if (game.hasOwnProperty('status')) {
                     if (game.competitions[0].status.type.state === 'pre'){
                         return (
-                            <a href={game.links[0].href} target='_blank' rel="noreferrer">
+                            <a className='game_container' href={game.links[0].href} target='_blank' rel="noreferrer">
                                 <div className='game'>
+                                <div className='game_info'>
                                 <h3>{game.competitions[0].competitors[0].team.abbreviation}</h3>
                                 <img alt='img' src={game.competitions[0].competitors[0].team.logo} />
-                                <p>{game.competitions[0].status.type.shortDetail.slice(7,13).replace('P', '')}</p>
+                                <p>{game.competitions[0].status.type.shortDetail.slice(7,13).replace('P', '').replace('A', '').replace(' ', '')}</p>
                                 <img alt='img' src={game.competitions[0].competitors[1].team.logo} />
                                 <h3>{game.competitions[0].competitors[1].team.abbreviation}</h3>
+                                </div>
                             </div>
                             </a>
                         )
                     } else if (game.competitions[0].status.type.state === 'post'){
                         return (
-                            <a href={game.links[0].href} target='_blank' rel="noreferrer">
+                            <a className='game_container' href={game.links[0].href} target='_blank' rel="noreferrer">
                             <div className='game'>
+                                <div className='game_info'>
                                 <h3>{game.competitions[0].competitors[0].team.abbreviation}</h3>
                                 <img alt='img' src={game.competitions[0].competitors[0].team.logo} />
                                 <p>{game.competitions[0].competitors[0].score} - {game.competitions[0].competitors[1].score}</p>
                                 <img alt='img' src={game.competitions[0].competitors[1].team.logo} />
                                 <h3>{game.competitions[0].competitors[1].team.abbreviation}</h3>
+                                </div>
                                 <span>Full Time</span>
                             </div>
                             </a>
                         )
                     } else {
                         return (
-                            <a href={game.links[0].href} target='_blank' rel="noreferrer">
+                            <a className='game_container' href={game.links[0].href} target='_blank' rel="noreferrer">
                             <div className='game'>
+                                <div className='game_info'>
                                 <h3>{game.competitions[0].competitors[0].team.abbreviation}</h3>
                                 <img alt='img' src={game.competitions[0].competitors[0].team.logo} />
                                 <p>{game.competitions[0].competitors[0].score} - {game.competitions[0].competitors[1].score}</p>
                                 <img alt='img' src={game.competitions[0].competitors[1].team.logo} />
                                 <h3>{game.competitions[0].competitors[1].team.abbreviation}</h3>
+                                </div>
                                 <span>{game.competitions[0].status.type.description}</span>
                             </div>
                             </a>
@@ -110,35 +109,16 @@ const Home = () => {
             <div class='news'>
                 {news.length > 0 && news.map(article => {
                     return (
+                        <div className='art_container'>
                         <div class='article'>
                             <img alt='img' className='news_img' src={article.images[0].url} />
                         <a href={article.links.web.href} target='_blank' rel="noreferrer">{article.headline}</a>
                         </div>
+                        </div>
                         )
                 })}
             </div>
-            {standings.length > 0 && (
-                <div class='simple_table'>
-                <table>
-                    <thead>
-                        <th>Pos.</th>
-                        <th>Team</th>
-                        <th>Pts.</th>
-                    </thead>
-                    <tbody>
-                        {standings.map(team => {
-                            return (
-                                <tr>
-                                    <th>{standings.indexOf(team) + 1}</th>
-                                    <th className='club_simple'>{team.team.name}</th>
-                                    <th>{team.stats[6].displayValue}</th>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            )}
+            
         </div>
     )
 }
