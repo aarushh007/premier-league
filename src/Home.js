@@ -5,6 +5,7 @@ const Home = () => {
     const [games, setGames] = useState([])
     const [news, setNews] = useState([])
     useEffect(() => {
+        document.title = 'Premier League Home'
         const func = async () => {
             let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
             let json = await r.json()
@@ -32,21 +33,71 @@ const Home = () => {
             for (let i = 0; i<matchDays.length;i++){
                 let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
                 let json = await r.json()
-                finalData.push(json.events[0].status.type.detail)
+                if(json.events[0].status.type.detail.toString().slice(0, -15)) {
+                    finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
+                } else {
+                    finalData.push('Today')
+                }
                 for (let j = 0; j < json.events.length; j++){
                     finalData.push(json.events[j]);
                 }
             }
             setGames(finalData)
         }
-        const news = async () => {
+        const getNews = async () => {
             fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
                 .then((response) => response.json())
                 .then((data) => setNews(data.articles))
         }
         func()
-        news()
+        getNews()
     }, [])
+    const removeFakeNews = () => {
+        for(let i = 0; i < news.length; i++){
+            if(news[i].images.length === 0){
+                setNews(news.splice(i, 1))
+            }
+        }
+    }
+    removeFakeNews()
+    const refreshData = async () => {
+        let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+        let json = await r.json()
+        let today = json.day.date
+        let allDays = json.leagues[0].calendar;
+        let todayIndex = 0;
+        let gameDays = []
+        for (let i = 0; i< allDays.length; i++) {
+            if (allDays[i].includes(today)){
+                todayIndex = i
+                gameDays.push(todayIndex)
+                gameDays.push(todayIndex + 1)
+                gameDays.push(todayIndex + 2)
+            }
+        }
+        let matchDays = []
+        for (let i = 0; i < gameDays.length; i++){
+            matchDays.push(json.leagues[0].calendar[gameDays[i]])
+        }
+        for (let i = 0; i < matchDays.length; i++){
+            matchDays[i] = matchDays[i].slice(0, 10).replace('-', '').replace('-', '')
+            
+        }
+        let finalData = []
+        for (let i = 0; i<matchDays.length;i++){
+            let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
+            let json = await r.json()
+            if(json.events[0].status.type.detail.toString().slice(0, -15)) {
+                finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
+            } else {
+                finalData.push('Today')
+            }
+            for (let j = 0; j < json.events.length; j++){
+                finalData.push(json.events[j]);
+            }
+        }
+        setGames(finalData)
+    }
     return (
         <div className='home'>
             <div className="games">
@@ -92,15 +143,18 @@ const Home = () => {
                                 <img alt='img' src={game.competitions[0].competitors[1].team.logo} />
                                 <h3>{game.competitions[0].competitors[1].team.abbreviation}</h3>
                                 </div>
-                                <span>{game.competitions[0].status.type.description}</span>
+                                <span>{game.competitions[0].status.type.detail}</span>
                             </div>
                             </a>
                         )
                     }
                 } else {
                     return (
-                        <div class='matchday'>
-                            {game.toString().slice(0, -15)}
+                        <div className='matchday'>
+                            <span>{game}</span>
+                            {games.indexOf(game) === 0 && <button className='refresh_button' onClick={() => {
+                                refreshData();
+                            }}>Refresh <i class="fas fa-sync-alt"></i></button>}
                         </div>
                     )
                 }
@@ -110,12 +164,12 @@ const Home = () => {
                 {news.length > 0 && news.map(article => {
                     return (
                         <div className='art_container'>
-                        <div class='article'>
-                            <img alt='img' className='news_img' src={article.images[0].url} />
+                        {article.images.length > 0 && <div class='article'>
+                        <img alt='img' className='news_img' src={article.images[0].url} />
                         <a href={article.links.web.href} target='_blank' rel="noreferrer">{article.headline}</a>
+                        </div>}
                         </div>
-                        </div>
-                        )
+                    )
                 })}
             </div>
             

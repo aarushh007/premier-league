@@ -10,6 +10,7 @@ const Nav = () => {
             <Link to='/' className='wide'>Home</Link>
             <Link to='/table' className='wide'>Table</Link>
             <Link to='/' className='wide'>Fixtures</Link>
+            <Link to='/' className='wide'>Results</Link>
             <Link to='/' className='wide'>Stats</Link>
             <Link to='/' className='wide'>Rosters</Link>
             <i onClick={() => setMenu(!menu)} className="fas fa-bars mobile"></i>
@@ -18,6 +19,7 @@ const Nav = () => {
                     <Link to='/'>Home</Link>
                     <Link to='/table'>Table</Link>
                     <Link to='/'>Fixtures</Link>
+                    <Link to='/'>Results</Link>
                     <Link to='/'>Stats</Link>
                     <Link to='/'>Rosters</Link>
                 </div>
