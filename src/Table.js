@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import './Table.css'
 
 const Table = () => {
     const [standings, setStandings] = useState([])

@@ -1,0 +1,74 @@
+
+.main_table {
+    color: white;
+    width: 95%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .main_table th {
+    padding: 5px 10px;
+    background-color: rgb(29, 29, 29);
+  }
+  .main_table thead th{
+    background-color: rgb(49, 49, 49);
+    color: lime;
+  }
+  .club {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  h1 {
+    margin-left: 2.5%;
+    color: white;
+  }
+  
+  .small_table {
+    display: none;
+  }
+  
+  
+  
+  
+  .very_small_table {
+    display: none;
+  }
+  .notverysmall {
+    display: table-cell;
+  }
+  
+  
+  .wdl {
+    word-wrap: nowrap;
+  }
+  
+  
+  
+  @media (max-width: 870px){
+    .wide_table {
+      display: none;
+    }
+    .small_table {
+      display: table-row;
+    }
+  }
+  
+  
+  
+  @media (max-width: 560px){
+    .main_table {
+      font-size: 0.8em;
+    }
+    .very_small_table {
+      display: table-cell;
+    }
+    .notverysmall {
+      display: none;
+    }
+  }
+  
+  

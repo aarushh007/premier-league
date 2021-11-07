@@ -9,6 +9,7 @@ import {
 import Nav from './Nav';
 import Home from './Home';
 import Table from './Table';
+import Fixtures from './Fixtures';
 
 
 function App() {
@@ -20,8 +21,11 @@ function App() {
           <Route path='/' exact>
             <Home />
           </Route>
-          <Route path='/table' exact>
+          <Route path='/table'>
             <Table />
+          </Route>
+          <Route path='/fixtures'>
+            <Fixtures />
           </Route>
         </Switch>
       </Router>

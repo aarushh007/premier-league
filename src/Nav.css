@@ -1,0 +1,71 @@
+.navbar {
+    width: 100%;
+    background-color: #160021;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    min-width: 100%;
+  }
+  
+  /* Navbar links */
+  .navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    height: 100%;
+    color: #00FF85;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .navbar a :not(img):hover{
+    border-bottom: 2px solid white;
+  }
+  
+  .pl_logo {
+    max-width: 100px;
+  }
+  
+  /* Navbar links on mouse-over */
+  .navbar a:hover {
+    color: white;
+  }
+
+  .mobile {
+    display: none;
+    color: white;
+    font-size: 35px;
+    margin-left: auto;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
+  
+  .dropdown {
+    background-color: lime;
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+    top: 70px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 1;
+  }
+  
+  .dropdown a {
+    color: purple;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.3em;
+  }
+
+  @media (max-width: 580px){
+    .wide {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }

@@ -1,5 +1,6 @@
 import React from 'react'
 import {useEffect, useState} from 'react';
+import './Home.css';
 
 const Home = () => {
     const [games, setGames] = useState([])

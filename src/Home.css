@@ -1,0 +1,198 @@
+
+.game img {
+    max-width: 35px;
+    max-height: 35px;
+  }
+  
+  .game {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    background-color: #160021;
+    padding: 5px 15px;
+    color: white;
+    min-width: 270px;
+    border-bottom: solid 1px #00FF85;
+    max-height: 80px;
+    text-decoration: none;
+  }
+  .game span {
+    margin: auto;
+  }
+  .game_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .game:hover {
+    background: linear-gradient(to right, #04F5FF, #E90052)
+  }
+  
+  .game span {
+    position: relative;
+    bottom: 10px;
+    text-decoration: none;
+  }
+  .game p {
+    background-color: #38003C;
+    padding: 5px;
+    text-decoration: none;
+  }
+  .matchday {
+    color: white;
+    font-size: 17px;
+  }
+  
+  .game :hover {
+    background-color: linear-gradient(to right,#04F5FF, #E90052);
+  }
+  .games {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+    grid-area: games;
+    overflow: auto;
+    min-width: 270px;
+  }
+  
+  .home {
+    display: grid;
+    grid-template-areas: 'games news news table';
+    gap: 10px;
+    padding: 30px;
+  }
+  
+  .news {
+    grid-area: news;
+    padding: none;
+    min-width: 300px;
+    margin-right: 15px;
+    margin-left: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+    height: fit-content;
+  }
+  
+  .article {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .news_img {
+    width: 100%;
+  }
+  
+  
+  
+  .article a {
+    color: #00FF85;
+    text-decoration: none;
+    font-size: 1.6vw;
+  }
+  
+  .article a:hover {
+    color: white;
+  }
+  
+  .matchday {
+    font-size: 20px;
+  }
+  .matchday:not(:first-child){
+    margin-top: 20px;
+  }
+
+  .matchday {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .refresh_button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  .game_container {
+    text-decoration: none;
+  }
+  
+  .art_container {
+    height: fit-content;
+  }
+  @media (max-width: 1200px){
+    .news {
+      grid-template-columns: 1fr;
+      grid-template-rows:auto;
+    }
+    .article a {
+      font-size: 40px;
+    }
+  }
+  @media (max-width: 1200px){
+    .news {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 1fr;
+    }
+    .article a {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 920px){
+    .home {
+      grid-template-areas: 'games news news';
+    }
+  }
+
+  @media (max-width: 650px){
+    .home {
+      grid-template-areas: 'games'
+                            'news'
+    }
+    .games {
+      min-width: 100%;
+      align-items:center;
+    }
+    .matchday {
+      max-width: 300px;
+    }
+  }
+  @media (max-width: 500px){
+    .home {
+      padding: 10px 0;
+    }
+    .game_container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+    .game {
+      width: 100%;
+      margin: none;
+      padding: none;
+    }
+    .game_info {
+      width: fit-content;
+      margin: auto;
+      padding: none;
+    }
+    .news {
+      margin: 0px;
+    }
+  }
+  
+  @media (max-width: 340px){
+    .games {
+      font-size: 0.8em;
+    }
+  }
