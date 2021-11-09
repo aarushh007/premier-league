@@ -34,10 +34,14 @@ const Home = () => {
             for (let i = 0; i<matchDays.length;i++){
                 let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
                 let json = await r.json()
-                if(json.events[0].status.type.detail.toString().slice(0, -15)) {
+                if(json.events[0].status.type.detail.toString() !== 'FT') {
                     finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
                 } else {
-                    finalData.push('Today')
+                    let date = new Date(json.events[0].date)
+                    let todaysDate = new Date()
+                    if(date.getDate() === todaysDate.getDate()){
+                        finalData.push('Today')
+                    } else {finalData.push('Recently')}
                 }
                 for (let j = 0; j < json.events.length; j++){
                     finalData.push(json.events[j]);
@@ -91,7 +95,7 @@ const Home = () => {
             if(json.events[0].status.type.detail.toString().slice(0, -15)) {
                 finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
             } else {
-                finalData.push('Today')
+                finalData.push('yo')
             }
             for (let j = 0; j < json.events.length; j++){
                 finalData.push(json.events[j]);
