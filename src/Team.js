@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
-import { useEffect, useState } from 'react/cjs/react.development'
 import oops from './oops.jpeg'
 import './Team.css'
 
 const Team = () => {
-    let {team_id} = useParams()
-    const [data, setData] = useState()
-    const [fixture, setFixture] = useState()
+    let {team_id} = useParams();
+    const [data, setData] = useState();
+    const [fixture, setFixture] = useState();
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams/${team_id}/roster`)
