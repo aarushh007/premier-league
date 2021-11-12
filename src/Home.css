@@ -153,7 +153,7 @@
     }
   }
 
-  @media (max-width: 650px){
+  @media (max-width: 780px){
     .home {
       grid-template-areas: 'games'
                             'news'

@@ -5,8 +5,10 @@
     margin: auto;
     border-collapse: collapse;
     margin-bottom: 20px;
-  }
-  
+}
+.table_title {
+  margin: 10px 25px;
+}
   .main_table th {
     padding: 5px 10px;
     background-color: rgb(29, 29, 29);

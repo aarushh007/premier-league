@@ -5,6 +5,8 @@ const Table = () => {
     const [standings, setStandings] = useState([])
     useEffect(() => {
         document.title = 'Premier League Table'
+        document.querySelector('meta[name="description"]').setAttribute("content", "Updated Premier League table. Follow your favorite teams.");
+
         const getData = async () => {
             fetch('https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
                 .then((response) => response.json())
@@ -14,7 +16,7 @@ const Table = () => {
     }, [])
     return (
         <div>
-            <h1>Table</h1>
+            <h1 className='table_title'>Table</h1>
             <table className='main_table'>
             <thead>
             <tr className='wide_table'>
