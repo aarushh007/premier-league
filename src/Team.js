@@ -6,8 +6,8 @@ import './Team.css'
 
 const Team = () => {
     let {team_id} = useParams()
-    const [data, setData] = useState(null)
-    const [fixture, setFixture] = useState(null)
+    const [data, setData] = useState()
+    const [fixture, setFixture] = useState()
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams/${team_id}/roster`)
@@ -26,7 +26,7 @@ const Team = () => {
         getData()
     }, [team_id])
     let color_class = 'white';
-    if(data !== 'ERROR' && data !== null){
+    if(data !== 'ERROR' && data){
         if(data.team.abbreviation === 'LEE' || data.team.abbreviation === 'TOT' || data.team.abbreviation === 'NOR' || data.team.abbreviation === 'WOL' || data.team.abbreviation === 'WAT'){
             color_class = 'grey'
         }
@@ -40,7 +40,7 @@ const Team = () => {
                         <img id='error_img' src={oops} alt='oops'></img>
                     </div>
                 )}
-                {(data !== 'ERROR' && data !== null && fixture !== null) && (
+                {(data !== 'ERROR' && data && fixture) && (
                     <div>
                         <div style={{backgroundColor: `#${data.team.color}`}} className='club_info'>
                         <div className='club_img_wrapper'>
