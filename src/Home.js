@@ -115,7 +115,7 @@ const Home = () => {
                                 <div className='game_info'>
                                 <h3>{game.competitions[0].competitors[0].team.abbreviation}</h3>
                                 <img alt='img' src={game.competitions[0].competitors[0].team.logo} />
-                                <p>{game.competitions[0].status.type.shortDetail.slice(7,13).replace('P', '').replace('A', '').replace(' ', '')}</p>
+                                <p>{game.competitions[0].status.type.shortDetail.slice(6,12).replace('P', '').replace('A', '').replace(' ', '')}</p>
                                 <img alt='img' src={game.competitions[0].competitors[1].team.logo} />
                                 <h3>{game.competitions[0].competitors[1].team.abbreviation}</h3>
                                 </div>
