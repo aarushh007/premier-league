@@ -95,7 +95,7 @@ const Home = () => {
             if(json.events[0].status.type.detail.toString().slice(0, -15)) {
                 finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
             } else {
-                finalData.push('yo')
+                finalData.push('Nice matches 👇')
             }
             for (let j = 0; j < json.events.length; j++){
                 finalData.push(json.events[j]);
