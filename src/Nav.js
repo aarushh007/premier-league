@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link}  from "react-router-dom";
 import eng_logo from './eng_logo.png';
 import esp_logo from './esp_logo.png';
@@ -8,6 +8,11 @@ import './Nav.css'
 
 const Nav = () => {
     const [menu, setMenu] = useState(false)
+    useEffect(() => {
+        if(!localStorage.getItem('league')){
+            localStorage.setItem('league', 'eng');
+        }
+    }, [])
     const change_league = (e) => {
         if(e.target.value === 'joe'){
             return;
