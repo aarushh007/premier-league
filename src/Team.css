@@ -22,6 +22,7 @@ h1 {
     display: flex;
     align-items: center;
     border-radius: 30px;
+    background-color: #1c1c1c;
 }
 
 .club_img_wrapper {
@@ -29,7 +30,7 @@ h1 {
     background-color: white;
     border-radius: 50%;
     padding: 20px;
-    margin-left: 20px;
+    margin-left: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +42,7 @@ h1 {
 }
 
 .club_info_container {
-    margin-left: 20px;
+    margin-left: 2rem;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -64,13 +65,13 @@ h1 {
     color: white;
     justify-content: space-between;
     padding: 20px 10px;
-    background-color: #160021;
+    background-color: #1c1c1c;
     border-bottom: solid 1px lime;
     text-decoration: none;
 }
 
 #club_fixture_time {
-    background-color: #38003C;
+    background-color: rgb(50, 50, 50);
     padding: 5px;
     font-weight: normal;
 }
@@ -105,12 +106,14 @@ h1 {
 @media(max-width: 630px){
     .club_img_wrapper {
         max-width: 120px;
+        margin-left: 0;
     }
     .club_img_wrapper img {
         max-width: 100px;
     }
     .club_info_container {
-        padding-left: 20px;
+        margin-left: 0;
+        margin-top: 1rem;
     }
     .club_info {
         flex-direction: column;

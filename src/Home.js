@@ -5,10 +5,20 @@ import './Home.css';
 const Home = () => {
     const [games, setGames] = useState([])
     const [news, setNews] = useState([])
+    const [league, setLeague] = useState()
     useEffect(() => {
-        document.title = 'Premier League Home'
+        let my_league;
+        if(!localStorage.getItem('league')){
+           localStorage.setItem('league', 'eng') 
+           localStorage.setItem('league_name', 'Premier League') 
+        }
+        my_league = localStorage.getItem('league')
+        setLeague(my_league)
+        let my_league_name = localStorage.getItem('league_name')
+        document.title = `${my_league_name} Home`
+        
         const func = async () => {
-            let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+            let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${my_league}.1/scoreboard`);
             let json = await r.json()
             let today = json.day.date
             let allDays = json.leagues[0].calendar;
@@ -32,7 +42,7 @@ const Home = () => {
             }
             let finalData = []
             for (let i = 0; i<matchDays.length;i++){
-                let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
+                let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${my_league}.1/scoreboard?dates=${matchDays[i]}`);
                 let json = await r.json()
                 if(json.events[0].status.type.detail.toString() !== 'FT') {
                     finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))
@@ -50,7 +60,7 @@ const Home = () => {
             setGames(finalData)
         }
         const getNews = async () => {
-            fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
+            fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${my_league}.1/news`)
                 .then((response) => response.json())
                 .then((data) => setNews(data.articles))
         }
@@ -66,7 +76,7 @@ const Home = () => {
     }
     removeFakeNews()
     const refreshData = async () => {
-        let r = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard');
+        let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${league}.1/scoreboard`);
         let json = await r.json()
         let today = json.day.date
         let allDays = json.leagues[0].calendar;
@@ -90,7 +100,7 @@ const Home = () => {
         }
         let finalData = []
         for (let i = 0; i<matchDays.length;i++){
-            let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${matchDays[i]}`);
+            let r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${league}.1/scoreboard?dates=${matchDays[i]}`);
             let json = await r.json()
             if(json.events[0].status.type.detail.toString().slice(0, -15)) {
                 finalData.push(json.events[0].status.type.detail.toString().slice(0, -15))

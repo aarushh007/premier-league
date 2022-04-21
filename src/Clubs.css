@@ -13,6 +13,7 @@
 
 .team img {
     max-width: 80px;
+    max-height: 80px;
     margin: 0;
 }
 .team:hover > .img_wrapper {

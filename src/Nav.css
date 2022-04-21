@@ -1,6 +1,6 @@
 .navbar {
     width: 100%;
-    background-color: #160021;
+    background-color: #1c1c1c;
     overflow: auto;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
     text-align: center;
     padding: 12px;
     height: 100%;
-    color: #00FF85;
+    color: #b9b9b9;
     text-decoration: none;
     font-size: 17px;
   }
@@ -24,6 +24,7 @@
   
   .pl_logo {
     max-width: 100px;
+    max-height: 50px;
   }
   
   /* Navbar links on mouse-over */
@@ -42,7 +43,7 @@
   
   
   .dropdown {
-    background-color: lime;
+    background-color: black;
     width: 100%;
     padding: 20px;
     position: fixed;
@@ -55,13 +56,13 @@
   }
   
   .dropdown a {
-    color: purple;
+    color: white;
     display: flex;
     justify-content: flex-start;
     font-size: 1.3em;
   }
 
-  @media (max-width: 580px){
+  @media (max-width: 720px){
     .wide {
       display: none;
     }
@@ -69,3 +70,19 @@
       display: block;
     }
   }
+
+ #logo {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+ }
+
+ select {
+   background-color: gray;
+   padding: 10px;
+   color: white;
+   outline: none;
+   font-size: 16px;
+   margin: 0 10px;
+ }

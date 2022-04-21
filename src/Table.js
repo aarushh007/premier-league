@@ -4,11 +4,13 @@ import './Table.css'
 const Table = () => {
     const [standings, setStandings] = useState([])
     useEffect(() => {
-        document.title = 'Premier League Table'
-        document.querySelector('meta[name="description"]').setAttribute("content", "Updated Premier League table. Follow your favorite teams.");
+        let my_league = localStorage.getItem('league')
+        let my_league_name = localStorage.getItem('league_name')
+        document.title = `${my_league_name} Table`
+        document.querySelector('meta[name="description"]').setAttribute("content", `Updated ${my_league_name} table. Follow your favorite teams.`);
 
         const getData = async () => {
-            fetch('https://site.api.espn.com/apis/v2/sports/soccer/eng.1/standings')
+            fetch(`https://site.api.espn.com/apis/v2/sports/soccer/${my_league}.1/standings`)
                 .then((response) => response.json())
                 .then((data) => setStandings(data.children[0].standings.entries))
         }

@@ -9,12 +9,12 @@ const Team = () => {
     const [fixture, setFixture] = useState();
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams/${team_id}/roster`)
+            const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${localStorage.getItem('league')}.1/teams/${team_id}/roster`)
             if(res.status === 200){
                 const j = await res.json()
                 document.title = j.team.name;
                 setData(j)
-                const fixtureData = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/teams/${team_id}`)
+                const fixtureData = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${localStorage.getItem('league')}.1/teams/${team_id}`)
                 const fixtureJson = await fixtureData.json()
                 setFixture(fixtureJson.team.nextEvent[0])
             } else {
@@ -25,11 +25,6 @@ const Team = () => {
         getData()
     }, [team_id])
     let color_class = 'white';
-    if(data !== 'ERROR' && data){
-        if(data.team.abbreviation === 'LEE' || data.team.abbreviation === 'TOT' || data.team.abbreviation === 'NOR' || data.team.abbreviation === 'WOL' || data.team.abbreviation === 'WAT'){
-            color_class = 'grey'
-        }
-    }
     return (
         <div>
             <div>
@@ -41,7 +36,7 @@ const Team = () => {
                 )}
                 {(data !== 'ERROR' && data && fixture) && (
                     <div>
-                        <div style={{backgroundColor: `#${data.team.color}`}} className='club_info'>
+                        <div className='club_info'>
                         <div className='club_img_wrapper'>
                         <img alt='team logo' src={data.team.logo} />
                         </div>

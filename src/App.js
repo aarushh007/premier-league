@@ -1,5 +1,5 @@
 import './App.css';
-//import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +16,12 @@ import oops from './oops.jpeg'
 
 
 function App() {
+  useEffect(() => {
+    if(!localStorage.getItem('league')){
+      localStorage.setItem('league', 'eng')
+      localStorage.setItem('league_name', 'Premier League')
+    }
+  }, [])
   return (
     <div className='app'>
       <Router>
