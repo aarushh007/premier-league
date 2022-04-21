@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Link}  from "react-router-dom";
 import eng_logo from './eng_logo.png';
 import esp_logo from './esp_logo.png';
 import ita_logo from './ita_logo.png';
-import ger_logo from './ger_logo.png'
+import ger_logo from './ger_logo.png';
+import por_logo from './por_logo.png'
 import './Nav.css'
 
 const Nav = () => {
     const [menu, setMenu] = useState(false)
-    useEffect(() => {
         if(!localStorage.getItem('league')){
             localStorage.setItem('league', 'eng');
+            localStorage.setItem('league_name', 'Premier League')
         }
-    }, [])
     const change_league = (e) => {
         if(e.target.value === 'joe'){
             return;
@@ -32,6 +32,9 @@ const Nav = () => {
             case 'ger':
                 localStorage.setItem('league_name', 'Bundesliga')
                 break;
+            case 'por':
+                localStorage.setItem('league_name', 'Primeira Liga')
+                break;
             default:
                 localStorage.setItem('league_name', 'football')
         }
@@ -48,6 +51,7 @@ const Nav = () => {
                 {localStorage.getItem('league') === 'esp' && <img alt='img' className='pl_logo' src={esp_logo}></img>}
                 {localStorage.getItem('league') === 'ita' && <img alt='img' className='pl_logo' src={ita_logo}></img>}
                 {localStorage.getItem('league') === 'ger' && <img alt='img' className='pl_logo' src={ger_logo}></img>}
+                {localStorage.getItem('league') === 'por' && <img alt='img' className='pl_logo' src={por_logo}></img>}
             </Link>
             <Link to='/' className='wide'>Home</Link>
             <Link to='/table' className='wide'>Table</Link>
@@ -61,6 +65,7 @@ const Nav = () => {
                 <option value='esp'>La Liga</option>
                 <option value='ita'>Serie A</option>
                 <option value='ger'>Bundesliga</option>
+                <option value='por'>Primeira Liga</option>
             </select>
             
             <i onClick={() => setMenu(!menu)} className="fas fa-bars mobile"></i>
@@ -69,7 +74,7 @@ const Nav = () => {
                     <Link onClick={() => {setMenu(!menu)}} to='/'>Home</Link>
                     <Link onClick={() => {setMenu(!menu)}} to='/table'>Table</Link>
                     <Link onClick={() => {setMenu(!menu)}} to='/clubs'>Clubs</Link>
-                    <Link onClick={() => {setMenu(!menu)}} to='/fixtures'>Fixtures</Link>
+                    <Link onClick={() => {setMenu(!menu)}} to='/'>Fixtures</Link>
                     <Link onClick={() => {setMenu(!menu)}} to='/'>Results</Link>
                     <Link onClick={() => {setMenu(!menu)}} to='/'>Stats</Link>
                 </div>
